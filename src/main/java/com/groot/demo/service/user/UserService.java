@@ -30,7 +30,7 @@ public class UserService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return new ResponseEntity(headers, HttpStatus.CREATED);
+        return new ResponseEntity<String>("회원가입 성공~", headers, HttpStatus.CREATED);
     }
 
     public ResponseEntity login(UserLoginDto userLoginDto){
@@ -45,9 +45,6 @@ public class UserService {
             throw new LoginException("비밀번호가 일치하지 않습니다.");
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        return new ResponseEntity<String>("로그인 성공~", headers, HttpStatus.CREATED);
+        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
     }
 }

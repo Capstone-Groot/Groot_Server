@@ -2,6 +2,7 @@ package com.groot.demo.entity;
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class User {
     @Column
     private String password;
 
-    @Column(unique = true)
+    @Column
     private String userName;
 
     @Builder
