@@ -1,7 +1,6 @@
 package com.groot.demo.command.user;
 
 import com.groot.demo.dto.UserLoginDto;
-import com.groot.demo.dto.UserRegisterDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +13,8 @@ public class UserLoginCommand {
 
     public UserLoginDto toDto() {
         return UserLoginDto.builder()
-                              .userId(userId)
-                              .password(password)
-                              .build();
+                           .userId(userId)
+                           .password(password)
+                           .build();
     }
 }

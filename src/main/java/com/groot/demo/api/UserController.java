@@ -26,9 +26,4 @@ public class UserController {
         return userService.login(userLoginCommand.toDto());
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-
 }
