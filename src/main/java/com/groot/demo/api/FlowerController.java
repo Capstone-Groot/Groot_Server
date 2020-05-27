@@ -17,7 +17,7 @@ public class FlowerController {
 
     private final FlowerService flowerService;
 
-    @PostMapping(value = "{userId}/flowers", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "{userId}/flowers")
     public ResponseEntity addFlower(MultipartFile picture) {
 
         return flowerService.add(FlowerAddDto.builder()
