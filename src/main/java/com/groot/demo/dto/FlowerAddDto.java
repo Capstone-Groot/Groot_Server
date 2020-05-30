@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 public class FlowerAddDto {
 
+    private String userId;
+
     private MultipartFile picture;
 
 }

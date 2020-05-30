@@ -17,13 +17,12 @@ public class FlowerController {
 
     private final FlowerService flowerService;
 
-    private String url = "http://localhost:5000/";
-
     @PostMapping(value = "{userId}/flowers")
-    public ResponseEntity addFlower(@RequestParam("picture") MultipartFile picture) throws Exception {
+    public ResponseEntity addFlower(@RequestParam("picture") MultipartFile picture, @RequestParam("userId") String userId) throws Exception {
 
         return flowerService.add(FlowerAddDto.builder()
                                              .picture(picture)
+                                             .userId(userId)
                                              .build());
     }
 }

@@ -3,6 +3,7 @@ package com.groot.demo.service.flower;
 import com.groot.demo.dto.FlowerAddDto;
 import com.groot.demo.entity.FlowerRepository;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,12 @@ public class FlowerService {
         body.add("file", fileResource);
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, httpHeaders);
-        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:5000/predict", requestEntity, String.class);
+        ResponseEntity<JSONObject> response = restTemplate.postForEntity("http://127.0.0.1:5000/predict", requestEntity, JSONObject.class);
 
+        System.out.println(response.getBody().get("image"));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        return new ResponseEntity<String>(response.getBody(), headers, HttpStatus.CREATED);
+        return new ResponseEntity<JSONObject>(response.getBody(), headers, HttpStatus.CREATED);
     }
 }

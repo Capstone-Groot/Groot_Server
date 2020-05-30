@@ -20,4 +20,11 @@ public class Flower {
     @CreatedDate
     private LocalDateTime createdDate;
 
+    @Column
+    private String filePath;
+
+    @ManyToOne
+    @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_flower_writer"))
+    private User writer;
+
 }
