@@ -1,11 +1,14 @@
 package com.groot.demo.entity;
 
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
 @NoArgsConstructor
 @Entity
 public class Flower {
@@ -14,10 +17,10 @@ public class Flower {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Enumerated(EnumType.STRING)
-    private FlowerType type;
+    @Column
+    private String type;
 
-    @CreatedDate
+    @Column
     private LocalDateTime createdDate;
 
     @Column
@@ -26,5 +29,12 @@ public class Flower {
     @ManyToOne
     @JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "fk_flower_writer"))
     private User writer;
+
+    public Flower(String type, String filePath, User writer){
+        this.createdDate = LocalDateTime.now();
+        this.type = type;
+        this.filePath = filePath;
+        this.writer = writer;
+    }
 
 }
