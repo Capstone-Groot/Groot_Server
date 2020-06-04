@@ -24,8 +24,13 @@ public class FlowerController {
                                              .build());
     }
 
-    @GetMapping(value = "flowers")
-    public ResponseEntity getFlower(@RequestParam("id") String id) throws IOException {
+    @GetMapping(value = "flowers/{id}")
+    public ResponseEntity getFlower(@PathVariable("id") String id) throws IOException {
         return flowerService.getImage(Long.parseLong(id));
+    }
+
+    @GetMapping(value = "history/{userId}")
+    public ResponseEntity getHistory(@PathVariable String userId) throws IOException{
+        return flowerService.getHistory(userId);
     }
 }

@@ -37,4 +37,8 @@ public class User {
         return false;
     }
 
+    public boolean isSameUser(String userId) {
+        return this.userId.equals(userId);
+    }
+
 }

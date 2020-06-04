@@ -24,6 +24,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +35,19 @@ public class FlowerService {
     private final UserRepository userRepository;
     private final FlowerRepository flowerRepository;
     private final RestTemplate restTemplate;
+
+    public ResponseEntity getHistory(String userId) {
+        List<Flower> flowers = flowerRepository.findAll();
+
+        List<Flower> myFlowers = flowers.stream().filter(flower -> flower.isWriter(userId)).collect(Collectors.toList());
+
+        List<JSONObject> entities = new ArrayList<JSONObject>();
+        for (Flower flower : myFlowers) {
+            entities.add(flower.getJson());
+        }
+
+        return new ResponseEntity<>(entities, HttpStatus.OK);
+    }
 
     public ResponseEntity getImage(Long id) throws IOException {
         Flower flower = flowerRepository.findById(id).orElseThrow(() -> new NotFoundFlowerException("꽃을 찾지 못하였습니다."));
@@ -75,7 +91,6 @@ public class FlowerService {
     private File saveFile(MultipartFile file) throws IOException {
         File convertFile = new File(ResourceManger.getIndex() + ".jpg");
 
-        System.out.println(file.getOriginalFilename());
         convertFile.createNewFile();
         FileOutputStream fout = new FileOutputStream(convertFile);
         fout.write(file.getBytes());
