@@ -3,6 +3,7 @@ package com.groot.demo.api;
 import com.groot.demo.dto.FlowerAddDto;
 import com.groot.demo.service.flower.FlowerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,8 +25,8 @@ public class FlowerController {
                                              .build());
     }
 
-    @GetMapping(value = "flowers/{id}")
-    public ResponseEntity getFlower(@PathVariable("id") String id) throws IOException {
+    @GetMapping(value = "flowers/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getFlower(@PathVariable("id") String id) throws IOException {
         return flowerService.getImage(Long.parseLong(id));
     }
 

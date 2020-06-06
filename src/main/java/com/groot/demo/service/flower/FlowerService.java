@@ -49,7 +49,7 @@ public class FlowerService {
         return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
-    public ResponseEntity getImage(Long id) throws IOException {
+    public byte[] getImage(Long id) throws IOException {
         Flower flower = flowerRepository.findById(id).orElseThrow(() -> new NotFoundFlowerException("꽃을 찾지 못하였습니다."));
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -63,10 +63,9 @@ public class FlowerService {
                 return "imageFile.jpg";
             }
         };
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", fileResource);
 
-        return new ResponseEntity<MultiValueMap<String, Object>>(body, httpHeaders, HttpStatus.OK);
+
+        return fileContent;
     }
 
     public ResponseEntity add(FlowerAddDto flowerAddDto) throws IOException {
