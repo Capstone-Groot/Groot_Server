@@ -47,7 +47,7 @@ public class UserService {
         }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("checkSeller", user.getCheckSeller());
+        jsonObject.put("sellerCheck", user.getCheckSeller());
 
         return new ResponseEntity<JSONObject>(jsonObject, HttpStatus.OK);
     }

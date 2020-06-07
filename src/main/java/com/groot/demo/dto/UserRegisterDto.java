@@ -13,14 +13,14 @@ public class UserRegisterDto {
 
     private String userName;
 
-    private String checkSeller;
+    private String sellerCheck;
 
     @Builder
-    public UserRegisterDto(String userId, String password, String userName, String checkSeller) {
+    public UserRegisterDto(String userId, String password, String userName, String sellerCheck) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
-        this.checkSeller = checkSeller;
+        this.sellerCheck = sellerCheck;
     }
 
     public User toEntity() {
@@ -28,7 +28,7 @@ public class UserRegisterDto {
                    .userName(userName)
                    .userId(userId)
                    .password(password)
-                   .checkSeller(checkSeller)
+                   .sellerCheck(sellerCheck)
                    .build();
     }
 }

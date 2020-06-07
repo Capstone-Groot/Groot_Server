@@ -14,14 +14,14 @@ public class UserRegisterCommand {
 
     private String userName;
 
-    private String checkSeller;
+    private String sellerCheck;
 
     public UserRegisterDto toDto() {
         return UserRegisterDto.builder()
                               .userName(userName)
                               .userId(userId)
                               .password(password)
-                              .checkSeller(checkSeller)
+                              .sellerCheck(sellerCheck)
                               .build();
     }
 

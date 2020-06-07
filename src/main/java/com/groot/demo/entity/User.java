@@ -25,14 +25,14 @@ public class User {
     private String userName;
 
     @Column
-    private String checkSeller;
+    private String sellerCheck;
 
     @Builder
-    public User(String userId, String password, String userName, String checkSeller) {
+    public User(String userId, String password, String userName, String sellerCheck) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
-        this.checkSeller = checkSeller;
+        this.sellerCheck = sellerCheck;
     }
 
     public boolean isSamePassword(String password) {
