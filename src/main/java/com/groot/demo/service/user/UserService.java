@@ -7,6 +7,7 @@ import com.groot.demo.entity.UserRepository;
 import com.groot.demo.exception.DuplicationException;
 import com.groot.demo.exception.LoginException;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,9 +20,9 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public ResponseEntity register(UserRegisterDto userRegisterDto){
+    public ResponseEntity register(UserRegisterDto userRegisterDto) {
 
-        if(userRepository.existsByUserId(userRegisterDto.getUserId())){
+        if (userRepository.existsByUserId(userRegisterDto.getUserId())) {
             throw new DuplicationException("아이디가 중복 입니다.");
         }
 
@@ -33,18 +34,21 @@ public class UserService {
         return new ResponseEntity<String>("회원가입 성공~", headers, HttpStatus.CREATED);
     }
 
-    public ResponseEntity login(UserLoginDto userLoginDto){
+    public ResponseEntity login(UserLoginDto userLoginDto) {
 
-        if(!userRepository.existsByUserId(userLoginDto.getUserId())){
+        if (!userRepository.existsByUserId(userLoginDto.getUserId())) {
             throw new LoginException("아이디를 찾지 못하였습니다.");
         }
 
         User user = userRepository.findByUserId(userLoginDto.getUserId());
 
-        if(!user.isSamePassword(userLoginDto.getPassword())){
+        if (!user.isSamePassword(userLoginDto.getPassword())) {
             throw new LoginException("비밀번호가 일치하지 않습니다.");
         }
 
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("checkSeller", user.getCheckSeller());
+
+        return new ResponseEntity<JSONObject>(jsonObject, HttpStatus.OK);
     }
 }

@@ -1,11 +1,13 @@
 package com.groot.demo.entity;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 
+@Getter
 @NoArgsConstructor
 @Entity
 public class User {
@@ -22,11 +24,15 @@ public class User {
     @Column
     private String userName;
 
+    @Column
+    private String checkSeller;
+
     @Builder
-    public User(String userId, String password, String userName) {
+    public User(String userId, String password, String userName, String checkSeller) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
+        this.checkSeller = checkSeller;
     }
 
     public boolean isSamePassword(String password) {
