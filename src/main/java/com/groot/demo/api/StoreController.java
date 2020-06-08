@@ -3,11 +3,10 @@ package com.groot.demo.api;
 import com.groot.demo.command.store.StoreCommand;
 import com.groot.demo.service.store.StoreService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RequestMapping("/api")
@@ -19,5 +18,10 @@ public class StoreController {
     @PostMapping(value = "/store")
     public ResponseEntity create(@RequestBody StoreCommand storeCommand){
         return storeService.create(storeCommand.toDto());
+    }
+
+    @GetMapping(value = "/store/{flower}")
+    public ResponseEntity find(@PathVariable String flower){
+        return storeService.find(flower);
     }
 }
